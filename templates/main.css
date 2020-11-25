@@ -367,3 +367,25 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(85, 85, 85, 0.075);
   }
+
+  .em{
+    font-size: 30px;
+    float: left;
+    background-color: rgba(255, 255, 255, 0.349);
+    margin-bottom: 8px;
+  }
+
+  .em:hover{
+
+
+  }
+
+  .eml{
+      
+  
+  }
+
+  .popEmoji{
+      font-size: 40px;
+      margin-right: 50px;
+  }

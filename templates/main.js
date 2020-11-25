@@ -44,12 +44,22 @@ $('.message-submit').click(function() {
 
 //Emoji
 var clicked = false;
+
+
+//This Function Use Intergrating With model
+function connectWithModel(){
+  var listEmojies = [
+    '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
+  ]
+  return listEmojies[0];
+}
+
+
 $('.message-emoji').click(function() {
     if (clicked) {
-        
         $('.imoji-list').html('');
     } else {
-        $('.imoji-list').html('Asanka');
+        $('.imoji-list').html(connectWithModel());
     }
     clicked = !clicked;
     
@@ -96,3 +106,21 @@ function fakeMessage() {
   }, 1000 + (Math.random() * 20) * 100);
 
 }
+
+
+function _click(id){
+  insertEmojiee(id);
+}
+
+
+function insertEmojiee(id) {
+  msg = $('.message-input').val();
+  $('<div class="message  message-personal popEmoji">'+id+'</div>').appendTo($('.mCSB_container')).addClass('new');
+  setDate();
+  $('.message-input').val(null);
+  updateScrollbar();
+  setTimeout(function() {
+    fakeMessage();
+  }, 1000 + (Math.random() * 20) * 100);
+}
+
