@@ -28,7 +28,6 @@ else:
     
 
 import cv2
-import tensorflow as tf
 from tensorflow.keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
@@ -48,7 +47,7 @@ while notFounding:
     for (x,y,w,h) in faces:
         print('88888888888')
         img = img[y:y+h, x:x+w]
-        cv2.imwrite('abc.png', gray)
+        cv2.imwrite('abc.png', img)
         imagename = 'abc.png'
         test_image = image.load_img(imagename, target_size = (224, 224))
         test_image = image.img_to_array(test_image)

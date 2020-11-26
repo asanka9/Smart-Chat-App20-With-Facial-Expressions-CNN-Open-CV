@@ -6,5 +6,5 @@ save_non_project_files = False
 
 [main]
 version = 0.2.0
-recent_files = ['C:\\Users\\User\\.spyder-py3\\temp.py', 'modelApp.py', 'predict.py', 'prediction', 'prediction.py', 'cnn.py', 'C:\\Users\\User\\anaconda3\\envs\\group\\lib\\site-packages\\tensorflow\\python\\keras\\saving\\hdf5_format.py', 'C:\\Users\\User\\anaconda3\\envs\\group\\lib\\site-packages\\tensorflow\\python\\keras\\utils\\generic_utils.py']
+recent_files = ['C:\\Users\\User\\.spyder-py3\\temp.py', 'modelApp.py', 'predict.py', 'prediction', 'prediction.py', 'cnn.py', 'C:\\Users\\User\\anaconda3\\envs\\group\\lib\\site-packages\\tensorflow\\python\\keras\\saving\\hdf5_format.py', 'C:\\Users\\User\\anaconda3\\envs\\group\\lib\\site-packages\\tensorflow\\python\\keras\\utils\\generic_utils.py', 'template\\main.css', 'template\\index.html', 'template\\main.js', 'run.py', 'static\\main.css']
 
