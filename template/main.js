@@ -49,7 +49,7 @@ var clicked = false;
 //This Function Use Intergrating With model
 function connectWithModel(){
   var listEmojies = [
-    '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
+    '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
   ]
   $.getJSON('/background_process_test',
             function(data) {
@@ -64,9 +64,10 @@ $('.message-emoji').click(function() {
         $('.imoji-list').html('');
     } else {
       var listEmojies = [
-        '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
+        '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
       ]
-      $('.imoji-list').html('<div class="loader" id="loader-4"><span></span><span></span><span></span><span></span><span></span></div>');
+     // $('.imoji-list').html('<div class="loader" id="loader-4"><span></span><span></span><span></span><span></span><span></span></div>');
+      $('.imoji-list').html(listEmojies[0])
       $.getJSON('/background_process_test',
             function(data) {
               alert(data['index']);

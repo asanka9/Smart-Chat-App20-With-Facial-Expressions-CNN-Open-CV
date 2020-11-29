@@ -337,18 +337,22 @@ body {
     z-index: 1;
     top: 9px;
     right: 10px;
-    color: #fff;
+    color: rgb(236, 232, 232);
     border: none;
-    background: #fff;
-    font-size: 10px;
+    background: rgba(255, 255, 255, 0.021);
     text-transform: uppercase;
     line-height: 1;
-    padding: 6px 10px;
+    padding: 2PX 3px;
     border-radius: 30px;
     outline: none !important;
     transition: background 0.2s ease;
-    margin-right: 30px;
+    margin-right: 60px;
 }
+
+.message-box .message-emoji {
+    cursor: pointer;
+}
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -369,19 +373,22 @@ body {
   }
 
   .em{
-    font-size: 30px;
+    font-size: 25px;
     float: left;
     background-color: rgba(255, 255, 255, 0.349);
     margin-bottom: 8px;
+    border-radius: 6px;
+    margin-left: 5px;
   }
 
   .em:hover{
-
+    background-color: rgba(255, 255, 255, 0.562);
+    cursor: pointer;
 
   }
 
   .eml{
-      
+      margin-left: 73%;
   
   }
 
@@ -391,7 +398,7 @@ body {
   }
 
   .loader{
-      margin-left: 15px;
+      margin-left: 68%;
       margin-bottom: 2px;
   }
   
