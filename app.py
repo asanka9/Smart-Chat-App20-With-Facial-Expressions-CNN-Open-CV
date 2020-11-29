@@ -12,6 +12,7 @@ from keras.preprocessing import image
 import numpy as np
 
 app = Flask(__name__, template_folder='template')
+model = load_model('facefeatures_new_model.h5')
 
 @app.route("/")
 def index():
@@ -38,24 +39,21 @@ def background_process_test():
             test_image = image.load_img(imagename, target_size = (224, 224))
             test_image = image.img_to_array(test_image)
             test_image = np.expand_dims(test_image, axis = 0)
-            model = load_model('facefeatures_new_model.h5')
             result = model.predict(test_image)
 
             if result[0][0] == 1:
-                prediction = 'dog'
                 #return [{ "image" : prediction}]
                 print('1 found')
                 return jsonify({'index': 0})
             else:
-                prediction = 'cat'
                 #return [{ "image" : prediction}]
                 print('2 found')
                 return jsonify({'index': 0})
             
             notFounding = False
-    camera.release()
+    del(camera)
 
-    
+     
     
     
 

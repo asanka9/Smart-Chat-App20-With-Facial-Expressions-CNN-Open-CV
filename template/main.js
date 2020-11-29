@@ -51,6 +51,10 @@ function connectWithModel(){
   var listEmojies = [
     '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
   ]
+  $.getJSON('/background_process_test',
+            function(data) {
+              alert(data['index']);
+            });
   return listEmojies[0];
 }
 
@@ -59,7 +63,16 @@ $('.message-emoji').click(function() {
     if (clicked) {
         $('.imoji-list').html('');
     } else {
-        $('.imoji-list').html(connectWithModel());
+      var listEmojies = [
+        '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
+      ]
+      $('.imoji-list').html('<div class="loader" id="loader-4"><span></span><span></span><span></span><span></span><span></span></div>');
+      $.getJSON('/background_process_test',
+            function(data) {
+              alert(data['index']);
+               $('.imoji-list').html(listEmojies[data['index']]);
+            });
+       
     }
     clicked = !clicked;
     
