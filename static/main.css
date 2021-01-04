@@ -22,7 +22,7 @@ body {
     z-index: 1;
     
     background: url("https://images.unsplash.com/photo-1451186859696-371d9477be93?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1925") no-repeat 0 0;
-    
+    background-color: white;
     filter: blur(80px);
     transform: scale(1.2);
 }
@@ -240,7 +240,7 @@ body {
     height: 17px;
     margin: 0;
     padding-right: 20px;
-    width: 265px;
+    width: 700px;
 }
 .message-box textarea:focus:-webkit-placeholder {
     color: transparent;
@@ -337,18 +337,22 @@ body {
     z-index: 1;
     top: 9px;
     right: 10px;
-    color: #fff;
+    color: rgb(236, 232, 232);
     border: none;
-    background: #fff;
-    font-size: 10px;
+    background: rgba(255, 255, 255, 0.021);
     text-transform: uppercase;
     line-height: 1;
-    padding: 6px 10px;
+    padding: 2PX 3px;
     border-radius: 30px;
     outline: none !important;
     transition: background 0.2s ease;
-    margin-right: 30px;
+    margin-right: 60px;
 }
+
+.message-box .message-emoji {
+    cursor: pointer;
+}
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -369,29 +373,30 @@ body {
   }
 
   .em{
-    font-size: 30px;
+    font-size: 25px;
     float: left;
     background-color: rgba(255, 255, 255, 0.349);
     margin-bottom: 8px;
+    border-radius: 6px;
+    margin-left: 5px;
   }
 
   .em:hover{
-
+    background-color: rgba(255, 255, 255, 0.562);
+    cursor: pointer;
 
   }
 
   .eml{
-      
-  
+      margin-left: 73%;
   }
 
   .popEmoji{
-      font-size: 40px;
       margin-right: 50px;
   }
 
   .loader{
-      margin-left: 15px;
+      margin-left: 77%;
       margin-bottom: 2px;
   }
   

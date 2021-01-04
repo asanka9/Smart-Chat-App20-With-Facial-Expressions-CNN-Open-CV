@@ -2,6 +2,9 @@ var $messages = $('.messages-content'),
     d, h, m,
     i = 0;
 
+
+
+
 $(window).load(function() {
   $messages.mCustomScrollbar();
   setTimeout(function() {
@@ -49,12 +52,14 @@ var clicked = false;
 //This Function Use Intergrating With model
 function connectWithModel(){
   var listEmojies = [
-    '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
+    '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
   ]
+  
   $.getJSON('/background_process_test',
             function(data) {
               alert(data['index']);
             });
+  
   return listEmojies[0];
 }
 
@@ -64,15 +69,27 @@ $('.message-emoji').click(function() {
         $('.imoji-list').html('');
     } else {
       var listEmojies = [
-        '<div class="eml"><div class="em" id="&#x1F603;" onClick="_click(this.id)">&#x1F603;</div><div class="em" id="1F603" onClick="_click(this.id)" >&#x1F603;</div></div>'
+        // angry
+        '<div class="eml"><div class="em" id="&#x1F620;" onClick="_click(this.id)">&#x1F620;</div><div class="em" id="&#x1F624;" onClick="_click(this.id)">&#x1F624;</div><div class="em" id="&#x1F621;" onClick="_click(this.id)">&#x1F621;</div><div class="em" id="&#x1F92C;" onClick="_click(this.id)">&#x1F92C;</div><div class="em" id="&#x1F608" onClick="_click(this.id)" >&#x1F608;</div></div>',
+        // happy
+        '<div class="eml"><div class="em" id="&#x1F600;" onClick="_click(this.id)">&#x1F600;</div><div class="em" id="&#x1F642;" onClick="_click(this.id)">&#x1F642;</div><div class="em" id="&#x1F60A" onClick="_click(this.id)" >&#x1F60A;</div><div class="em" id="&#x1F602;" onClick="_click(this.id)">&#x1F602;</div><div class="em" id="&#x1F923;" onClick="_click(this.id)">&#x1F923;</div></div>',
+        //nuetral
+        '<div class="eml"><div class="em" id="&#x1F928;" onClick="_click(this.id)">&#x1F928;</div><div class="em" id="&#x1F610;" onClick="_click(this.id)">&#x1F610;</div><div class="em" id="&#x1F611" onClick="_click(this.id)" >&#x1F611;</div><div class="em" id="&#x1F636;" onClick="_click(this.id)">&#x1F636;</div><div class="em" id="&#x1F910;" onClick="_click(this.id)">&#x1F910;</div></div>',
+        // sad
+        '<div class="eml"><div class="em" id="&#x1F60C;" onClick="_click(this.id)">&#x1F60C;</div><div class="em" id="&#x1F614;" onClick="_click(this.id)">&#x1F614;</div><div class="em" id="&#x1F62A" onClick="_click(this.id)" >&#x1F62A;</div><div class="em" id="&#x1F62D;" onClick="_click(this.id)">&#x1F62D;</div><div class="em" id="&#x1F629;" onClick="_click(this.id)">&#x1F629;</div></div>',
+        // Suprise
+        '<div class="eml"><div class="em" id="&#x1F62E;" onClick="_click(this.id)">&#x1F62E;</div><div class="em" id="&#x1F62F;" onClick="_click(this.id)">&#x1F62F;</div><div class="em" id="&#x1F632" onClick="_click(this.id)" >&#x1F632;</div><div class="em" id="&#x1F631;" onClick="_click(this.id)">&#x1F631;</div><div class="em" id="&#x1F640;" onClick="_click(this.id)">&#x1F640;</div></div>',
+
+
       ]
       $('.imoji-list').html('<div class="loader" id="loader-4"><span></span><span></span><span></span><span></span><span></span></div>');
-      $.getJSON('/background_process_test',
+      
+      $.getJSON('/get_expression',
             function(data) {
-              alert(data['index']);
                $('.imoji-list').html(listEmojies[data['index']]);
             });
        
+
     }
     clicked = !clicked;
     
@@ -86,7 +103,7 @@ $(window).on('keydown', function(e) {
 })
 
 var Fake = [
-  'Hi there, I\'m Fabio and you?',
+  'Hi there, I and you?',
   'Nice to meet you',
   'How are you?',
   'Not too bad, thanks',
@@ -123,12 +140,16 @@ function fakeMessage() {
 
 function _click(id){
   insertEmojiee(id);
+  clicked = !clicked;
+  $('.imoji-list').html('');
+
+
 }
 
 
 function insertEmojiee(id) {
   msg = $('.message-input').val();
-  $('<div class="message  message-personal popEmoji">'+id+'</div>').appendTo($('.mCSB_container')).addClass('new');
+  $('<div  style="font-size: 25px;" class="message  message-personal popEmoji">'+id+'</div>').appendTo($('.mCSB_container')).addClass('new');
   setDate();
   $('.message-input').val(null);
   updateScrollbar();

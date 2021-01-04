@@ -19,8 +19,8 @@ import matplotlib.pyplot as plt
 # re-size all the images to this
 IMAGE_SIZE = [224, 224]
 
-train_path = 'Datasets/Train'
-valid_path = 'Datasets/Test'
+train_path = 'dataset/train'
+valid_path = 'dataset/test'
 
 # add preprocessing layer to the front of VGG
 vgg = VGG16(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top=False)
@@ -32,7 +32,7 @@ for layer in vgg.layers:
 
   
   # useful for getting number of classes
-folders = glob('Datasets/Train/*')
+folders = glob('dataset/train/*')
   
 
 # our layers - you can add more if you want
@@ -56,37 +56,51 @@ model.compile(
 
 from keras.preprocessing.image import ImageDataGenerator
 
-train_datagen = ImageDataGenerator(rescale = 1./255,
-                                   shear_range = 0.2,
-                                   zoom_range = 0.2,
-                                   horizontal_flip = True)
+train_datagen = ImageDataGenerator(      
+      rescale=1./255,
+      rotation_range=40,
+      width_shift_range=0.2,
+      height_shift_range=0.2,
+      shear_range=0.2,
+      zoom_range=0.2,
+      horizontal_flip=True,
+      fill_mode='nearest')
 
 test_datagen = ImageDataGenerator(rescale = 1./255)
 
-training_set = train_datagen.flow_from_directory('Datasets/Train',
+training_set = train_datagen.flow_from_directory('dataset/train',
                                                  target_size = (224, 224),
                                                  batch_size = 32,
                                                  class_mode = 'categorical')
 
-test_set = test_datagen.flow_from_directory('Datasets/Test',
+test_set = test_datagen.flow_from_directory('dataset/test',
                                             target_size = (224, 224),
                                             batch_size = 32,
                                             class_mode = 'categorical')
 
-'''r=model.fit_generator(training_set,
+
+"""
+r=model.fit_generator(training_set,
                          samples_per_epoch = 8000,
                          nb_epoch = 5,
                          validation_data = test_set,
-                         nb_val_samples = 2000)'''
+                         nb_val_samples = 2000)
+"""
 
+print("Hiiiiiiiiiiii")
+print(len(training_set))
+print("Hiiiiiiiiiiii")
+    
 # fit the model
+
 r = model.fit_generator(
-  training_set,
-  validation_data=test_set,
-  epochs=2,
-  steps_per_epoch=len(training_set),
-  validation_steps=len(test_set)
-)
+        training_set,
+        steps_per_epoch=60 ,
+        epochs=50,
+        validation_data=test_set,
+        validation_steps=12 )
+
+
 # loss
 plt.plot(r.history['loss'], label='train loss')
 plt.plot(r.history['val_loss'], label='val loss')
@@ -94,14 +108,13 @@ plt.legend()
 plt.show()
 plt.savefig('LossVal_loss')
 
-"""
 # accuracies
-plt.plot(r.history['acc'], label='train acc')
-plt.plot(r.history['val_acc'], label='val acc')
+plt.plot(r.history['accuracy'], label='train acc')
+plt.plot(r.history['val_accuracy'], label='val acc')
 plt.legend()
 plt.show()
 plt.savefig('AccVal_acc')
-"""
+
 
 
 import tensorflow as tf

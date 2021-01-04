@@ -8,54 +8,56 @@ Created on Thu Nov 26 11:12:26 2020
 from flask import Flask, render_template, Response, request, redirect, url_for, jsonify
 import cv2
 from tensorflow.keras.models import load_model
+import pickle
 from keras.preprocessing import image
 import numpy as np
+from keras.preprocessing.image import img_to_array
+
 
 app = Flask(__name__, template_folder='template')
 model = load_model('facefeatures_new_model.h5')
+face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+class_labels = ['Angry','Happy','Neutral','Sad','Surprise']
+
+
 
 @app.route("/")
 def index():
+    
     return render_template('index.html');
 
-@app.route('/background_process_test')
+@app.route('/get_expression')
 def background_process_test():
-    print ("Hello World")
-    camera = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0)
     notFounding = True
     while notFounding:
-        return_value, image_ = camera.read()
-        cv2.imwrite('cropped.png', image_)
-        face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-        img = cv2.imread('cropped.png')
-        gray = cv2.cvtColor(img, cv2.COLOR_RGBA2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-
+        ret, frame = cap.read()
+        labels = []
+        gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        faces = face_classifier.detectMultiScale(gray,1.3,5)
         for (x,y,w,h) in faces:
-            print('88888888888')
-            img = img[y:y+h, x:x+w]
-            cv2.imwrite('abc.png', img)
-            imagename = 'abc.png'
-            test_image = image.load_img(imagename, target_size = (224, 224))
-            test_image = image.img_to_array(test_image)
-            test_image = np.expand_dims(test_image, axis = 0)
-            result = model.predict(test_image)
+            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+            roi_gray = gray[y:y+h,x:x+w]
+            roi_gray = cv2.resize(roi_gray,(48,48),interpolation=cv2.INTER_AREA)
 
-            if result[0][0] == 1:
-                #return [{ "image" : prediction}]
-                print('1 found')
-                return jsonify({'index': 0})
-            else:
-                #return [{ "image" : prediction}]
-                print('2 found')
-                return jsonify({'index': 0})
-            
+            print('2222222222222')
+            if np.sum([roi_gray])!=0:
+                roi = roi_gray.astype('float')/255.0
+                roi = img_to_array(roi)
+                roi = np.expand_dims(roi,axis=0)
+                result = model.predict(roi)[0]
+                print('4444444444444')
+                print("\nprediction = ",result)
+                label=class_labels[result.argmax()]
+                print("\nprediction max = ",result.argmax())
+                print(type(result.argmax()))
+                return jsonify({'index': int(result.argmax())})
+
             notFounding = False
-    del(camera)
+    cap.release()
+
 
      
-    
-    
 
 if __name__ == '__main__': 
     app.run() 
